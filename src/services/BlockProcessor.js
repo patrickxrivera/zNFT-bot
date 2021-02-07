@@ -1,6 +1,7 @@
 import EthereumService from "./Ethereum";
 import EtherscanService from "./Etherscan";
 import BlockService from "./Block";
+import TokenService from "./Token";
 
 class BlockProcessorService {
   static async processIncomingBlocks() {
@@ -45,7 +46,11 @@ class BlockProcessorService {
       const toAddress = EthereumService.decodeAddress(encodedToAddress);
       const tokenId = EthereumService.decodeInt(encodedTokenId);
 
-      console.log({ toAddress, tokenId });
+      await TokenService.save({
+        ownerAddress: toAddress,
+        transactionHash: log.transactionHash,
+        tokenId: parseInt(tokenId),
+      });
     }
   }
 }
