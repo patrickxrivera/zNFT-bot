@@ -2,6 +2,8 @@ import EthereumService from "./Ethereum";
 import EtherscanService from "./Etherscan";
 
 class BlockProcessorService {
+  static async processIncomingBlocks() {}
+
   static async processBlock(blockNumber) {
     try {
       const logs = await EtherscanService.getTransferLogsForBlock(blockNumber);

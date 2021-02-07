@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import setupApolloServer from "./setup/apolloServer";
 import setupWebhooks from "./setup/webhooks";
+import setupJobProcessor from "./setup/jobProcessor";
 
 const app = express();
 
@@ -24,6 +25,8 @@ app.get("/", (req, res) => {
 });
 
 setupWebhooks(app);
+
+setupJobProcessor();
 
 apolloServer.applyMiddleware({ app, path: "/graphql" });
 

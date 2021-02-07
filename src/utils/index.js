@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
 
+const { parentPort } = require("worker_threads");
+
 const config = require("../config");
 
 export const getUserId = (ctx) => {
@@ -12,4 +14,8 @@ export const getUserId = (ctx) => {
 
     return verifiedToken && verifiedToken.userId;
   }
+};
+
+export const signalJobCompletion = () => {
+  parentPort ? parentPort.postMessage("done") : process.exit(0);
 };
