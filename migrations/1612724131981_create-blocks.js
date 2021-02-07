@@ -2,20 +2,17 @@
 
 exports.shorthands = undefined;
 
-const tableName = "users";
+const tableName = "blocks";
 
 exports.up = (pgm) => {
   pgm.createTable(tableName, {
     id: "id",
-    email: {
-      type: "varchar(255)",
+    number: {
+      type: "bigint",
       unique: true,
       notNull: true,
     },
-    password: {
-      type: "varchar(255)",
-      notNull: true,
-    },
+    processedAt: "timestamp",
     createdAt: {
       type: "timestamp",
       notNull: true,
@@ -26,6 +23,8 @@ exports.up = (pgm) => {
       notNull: true,
     },
   });
+
+  pgm.createIndex(tableName, "number");
 };
 
 exports.down = (pgm) => {

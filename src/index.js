@@ -7,7 +7,6 @@ import { isProdEnv } from "./config";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import setupApolloServer from "./setup/apolloServer";
-import setupWebhooks from "./setup/webhooks";
 import setupJobProcessor from "./setup/jobProcessor";
 
 const app = express();
@@ -24,19 +23,14 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-setupWebhooks(app);
-
 setupJobProcessor();
 
 apolloServer.applyMiddleware({ app, path: "/graphql" });
 
 const httpServer = createServer(app);
 
-apolloServer.installSubscriptionHandlers(httpServer);
-
 httpServer.listen({ port }, () => {
   if (!isProdEnv()) {
     console.log(`Server ready at http://localhost:${port}${apolloServer.graphqlPath}`);
-    console.log(`Subscriptions ready at ws://localhost:${port}${apolloServer.subscriptionsPath}`);
   }
 });

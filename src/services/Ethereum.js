@@ -7,6 +7,15 @@ const eth = new Web3Eth(
 );
 
 class EthereumService {
+  static async getCurrentBlockNumber() {
+    return eth.getBlockNumber();
+  }
+
+  static async blockHasBeenMined(blockNumber) {
+    const block = await eth.getBlock(blockNumber);
+    return !!block;
+  }
+
   static decodeAddress(topic) {
     return eth.abi.decodeParameter("address", topic);
   }

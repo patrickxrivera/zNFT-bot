@@ -34,7 +34,9 @@ class EtherscanService {
         return res.data.result;
       }
 
-      throw new Error("No results.");
+      console.log(`No logs for block #${blockNumber}`);
+
+      return null;
     } catch (err) {
       // TODO: log dis
       console.log(err);

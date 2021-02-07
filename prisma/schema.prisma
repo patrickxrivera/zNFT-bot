@@ -13,12 +13,13 @@ model pgmigrations {
   run_on DateTime
 }
 
-model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Block {
+  id          Int       @id @default(autoincrement())
+  number      Int       @unique
+  processedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
-  @@map("users")
+  @@index([number], name: "blocks_number_index")
+  @@map("blocks")
 }
