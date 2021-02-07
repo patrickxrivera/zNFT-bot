@@ -1,5 +1,5 @@
 {
-  "name": "zora-backend",
+  "name": "zNFT-bot",
   "version": "1.0.0",
   "dependencies": {
     "@babel/cli": "^7.12.8",
