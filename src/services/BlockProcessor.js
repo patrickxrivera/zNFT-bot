@@ -2,6 +2,8 @@ import EthereumService from "./Ethereum";
 import EtherscanService from "./Etherscan";
 import BlockService from "./Block";
 import TokenService from "./Token";
+import TwitterService from "./Twitter";
+import TheGraph from "./TheGraph";
 
 class BlockProcessorService {
   static async processIncomingBlocks() {
@@ -51,6 +53,12 @@ class BlockProcessorService {
         transactionHash: log.transactionHash,
         tokenId: parseInt(tokenId),
       });
+
+      const data = await TheGraph.getMediaById(parseInt(tokenId));
+
+      console.log(data);
+
+      await TwitterService.sendTweet(data);
     }
   }
 }

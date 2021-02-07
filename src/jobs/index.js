@@ -1,7 +1,7 @@
 export default [
   {
     name: "blockProcessor",
-    interval: "5s",
+    interval: "10s",
     timeout: 0, // run job on start
   },
 ];
